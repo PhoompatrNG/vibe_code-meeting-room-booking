@@ -6,6 +6,7 @@ const BookingForm = ({ room, selectedDate, initialBooking, onClose, onSubmit, on
   const [bookedBy, setBookedBy] = useState(initialBooking ? initialBooking.bookedBy : '');
   const [startTime, setStartTime] = useState(initialBooking ? initialBooking.startTime : '');
   const [endTime, setEndTime] = useState(initialBooking ? initialBooking.endTime : '');
+  const [date, setDate] = useState(selectedDate || new Date().toISOString().split('T')[0]);
   const [message, setMessage] = useState('');
 
   const isEditing = !!initialBooking;
@@ -24,7 +25,7 @@ const BookingForm = ({ room, selectedDate, initialBooking, onClose, onSubmit, on
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !bookedBy || !startTime || !endTime) {
+    if (!title || !bookedBy || !startTime || !endTime || !date) {
       setMessage('กรุณากรอกข้อมูลให้ครบถ้วน');
       return;
     }
@@ -36,7 +37,7 @@ const BookingForm = ({ room, selectedDate, initialBooking, onClose, onSubmit, on
 
     const bookingData = {
       roomId: room.id,
-      date: selectedDate,
+      date,
       startTime,
       endTime,
       title,
@@ -66,8 +67,17 @@ const BookingForm = ({ room, selectedDate, initialBooking, onClose, onSubmit, on
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-40 p-4">
       <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md transform transition-all duration-300 scale-100 opacity-100">
         <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">{isEditing ? 'แก้ไขการจอง' : 'จองห้อง'}: {room.name}</h3>
-        <p className="text-gray-700 mb-2">วันที่: <span className="font-semibold">{selectedDate}</span></p>
-
+        <div>
+          <label htmlFor="date" className="block text-gray-700 text-sm font-bold mb-2">วันที่:</label>
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            required
+          />
+        </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">หัวข้อการประชุม:</label>
