@@ -30,7 +30,7 @@ This project is a web-based application for booking meeting rooms. It is built u
    ```
 2. Navigate to the project directory:
    ```bash
-   cd meeting-room-booking
+   cd vibe_code-meeting-room-booking
    ```
 3. Install dependencies:
    ```bash
@@ -43,13 +43,13 @@ This project is a web-based application for booking meeting rooms. It is built u
    ```bash
    npm run dev
    ```
-2. Open your browser and navigate to `http://localhost:3000`.
+2. Open your browser and navigate to `http://localhost:5173/`.
 
 ### Building for Production
 
 To create a production build, run:
 ```bash
-npm run build
+npm run dev
 ```
 
 ## License
