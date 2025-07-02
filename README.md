@@ -49,7 +49,7 @@ This project is a web-based application for booking meeting rooms. It is built u
 
 To create a production build, run:
 ```bash
-npm run dev
+npm run build
 ```
 
 ## License
